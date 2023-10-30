@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const Cards = () => {
+const Cards = ({ searchTerm }) => {
   const [images, setImages] = useState([]);
 
   useEffect(() => {
     const fetchImages = async () => {
       const apiKey = 'HblQa8tI3AB6CrtlZCuHrxHnFy-ZOZ8g5toSRhJrIdA'; // Replace with your Unsplash API key
-      const url = 'https://api.unsplash.com/photos?page=1&query=nature';
+      const url = `https://api.unsplash.com/photos?page=1&query=${searchTerm}`;
 
       try {
         const response = await axios.get(url, {
@@ -22,7 +22,7 @@ const Cards = () => {
     };
 
     fetchImages();
-  }, []);
+  }, [searchTerm]);
 
   return (
     <div>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Navbar = () => {
+const Navbar = ({ handleSearch }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleChange = (event) => {
@@ -9,6 +9,7 @@ const Navbar = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    handleSearch(searchTerm);
   };
 
   return (
