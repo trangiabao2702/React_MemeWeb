@@ -6,8 +6,9 @@ import Navbar from "./components/navbar/navbar";
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
 
-  const handleSearch = (event) => {
-    setSearchTerm(event.target.value);
+  const handleSearch = (term) => {
+    console.log(term)
+    setSearchTerm(term);
   };
 
   return (

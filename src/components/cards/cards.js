@@ -8,7 +8,7 @@ const Cards = ({ searchTerm }) => {
 
   useEffect(() => {
     const fetchImages = async () => {
-      const apiKey = 'HblQa8tI3AB6CrtlZCuHrxHnFy-ZOZ8g5toSRhJrIdA';
+      const apiKey = 'WFwvzg6S2xaAXEeTQRhdSyCow6NCZ70Xk_jnh59HLYI';
       const url = `https://api.unsplash.com/photos?page=${page}&query=${searchTerm}`;
 
       try {
