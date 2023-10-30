@@ -1,37 +1,34 @@
-import React, { useEffect, useRef } from "react";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-const Cards = (props) => {
-  const { data, visiblePhotos, totalPhotos, onLoadMore, isLoading } = props;
-  const bottomRef = useRef();
+const Cards = () => {
+  const [images, setImages] = useState([]);
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (
-        bottomRef.current &&
-        bottomRef.current.getBoundingClientRect().top <= window.innerHeight
-      ) {
-        onLoadMore();
+    const fetchImages = async () => {
+      const apiKey = 'HblQa8tI3AB6CrtlZCuHrxHnFy-ZOZ8g5toSRhJrIdA'; // Replace with your Unsplash API key
+      const url = 'https://api.unsplash.com/photos?page=1&query=nature';
+
+      try {
+        const response = await axios.get(url, {
+          headers: {
+            Authorization: `Client-ID ${apiKey}`,
+          },
+        });
+        setImages(response.data);
+      } catch (error) {
+        console.error('Error fetching images:', error);
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [onLoadMore]);
+    fetchImages();
+  }, []);
 
   return (
     <div>
-      {data.map((item) => (
-        <div className="card" key={item.id}>
-          <h3>{item.title}</h3>
-          <p>{item.description}</p>
-        </div>
+      {images.map((image) => (
+        <img key={image.id} src={image.urls.small} alt={image.alt_description} />
       ))}
-
-      {isLoading && <p>Loading...</p>}
-
-      {visiblePhotos < totalPhotos && !isLoading && (
-        <div ref={bottomRef}>Scroll down to load more photos</div>
-      )}
     </div>
   );
 };
