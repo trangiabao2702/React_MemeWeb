@@ -7,7 +7,6 @@ function App() {
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleSearch = (term) => {
-    console.log(term)
     setSearchTerm(term);
   };
 
